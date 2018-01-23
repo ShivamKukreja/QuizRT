@@ -1,0 +1,73 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "QuizRT-Social"
+# during dev, should point to your local machine
+host: localhost:3000
+# basePath prefixes all resource paths
+basePath: /api/v1
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  # - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /:
+    get:
+      description: root path
+      responses:
+        "404":
+          description: Success
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /players:
+  
+    post:
+     
+    get:
+      
+  /players/{playerId}:
+    
+    post:
+
+    get:
+    
+  /topics:
+
+    post:
+
+    get:
+
+  /topics/{topicId}:
+
+    post:
+
+    get:
+
+  /posts:
+
+    post:
+
+    get:
+
+  /posts/{postId}:
+
+    post:
+
+    get:
+
+    
+# complex objects have schema definitions
+
+definitions:
+
+  Player:
+    
+  Topic:
+    
+  Post:

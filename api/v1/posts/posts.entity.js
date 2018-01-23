@@ -5,9 +5,9 @@ let schema = new mongoose.Schema({
   title: { type: String, required: true },
   // REFERENCE
   text: { type: String, required: true },
-  player: { type: String, required: true}
-  topics: [],
-  comments: []
+  player: { type: String, required: true},
+  topics: {type: Array, 'default': ['General']},
+  comments: {type: Array}
 }, { collection: 'posts' });
 
 

@@ -1,8 +1,11 @@
-const express = require('express');
-const morgan = require('morgan');
-const bodyParser = require('body-parser');
-
-const mongoConn = require('./mongoConnection')();
+const express = require('express'),
+    morgan = require('morgan'),
+    bodyParser = require('body-parser'),
+    yaml = require('yamljs'),
+    swaggerUI = require('swagger-ui-express'),
+    swaggerDoc = yaml.load('./api/swagger/swagger.yaml'),
+    // set up Mongoose Connection
+    mongoConn = require('./mongoConnection')();
 
 let app = express();
 
@@ -12,10 +15,21 @@ app.use(morgan('[:time] :remote-addr :method :url :status :res[content-length] :
 
 // Setup bodyParsing middleware
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 // Mount the APIs specific to version
 // app.use('/api/v1', require('./api/v1'));
 app.use(require('./api/v1'));
+
+// Mount the SwaggerUI  Middleware
+let swaggerOptions = {
+    explorer: false
+};
+app.use('/api/docs',
+    swaggerUI.serve,
+    swaggerUI.setup(swaggerDoc, swaggerOptions)
+);
 
 module.exports = app;
