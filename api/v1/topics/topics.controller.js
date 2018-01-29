@@ -16,18 +16,14 @@ const getTopics = function (done) {
     topicService.getTopics(done);
 }
 
-// const findProductByCode = function(productCode, done) {
-// 	async.waterfall([
-// 		productService.findProductByCode.bind(null, productCode),
-// 		// vendorCtrl.findVendorByCode
-// 	], (err, result) => {
-// 		done(null,result)
-// 	});
-// }
+const findTopicById = function(topicId, done) {
+    topicService.findTopicById(topicId, done)
+}
 
 module.exports = {
     getTopics,
-    addnewTopic
+    addnewTopic,
+    findTopicById
     //   addNewProduct,
     //   getProducts,
     //   submitReview,

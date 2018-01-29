@@ -1,5 +1,5 @@
 const TopicModel = require('./topics.entity');
-const {generateGuid} = require('../../../utils/index')
+const { generateGuid } = require('../../../utils/index')
 
 
 const addnewTopic = function (newTopic, done) {
@@ -13,7 +13,7 @@ const addnewTopic = function (newTopic, done) {
     topic.leadingUsers = newTopic.leadingUsers;
     topic.tags = newTopic.tags;
 
-    
+
 
     topic.save(function (err, savedDoc) {
         if (err) {
@@ -27,11 +27,9 @@ const addnewTopic = function (newTopic, done) {
 }
 
 const getTopics = function (done) {
-    // const query = {};
     TopicModel
         .find()
         .exec((err, colln) => {
-            console.log(colln)
             if (err) {
                 console.error('Error in finding products, ERROR::', err, ' queries for ', query);
                 done(err);
@@ -41,20 +39,18 @@ const getTopics = function (done) {
         });
 }
 
-// const findProductByCode = function (productCode, done) {
-//     // @TODO
-//     let query = { "code": productCode }
-//     TopicModel
-//         .findOne(query)
-//         .exec((err, res) => {
-//             if (err) {
-//                 console.error('Error in finding products, ERROR::', err, ' queries for ', query);
-//                 done(err);
-//                 return;
-//             }
-//             done(null, res);
-//         });
-// }
+const findTopicById = function (topicId, done) {
+    const query = { "topicId": topicId }
+    TopicModel.findOne(query)
+        .exec((err, res) => {
+            if (err) {
+                console.error('Error in finding products, ERROR::', err, ' queries for ', query);
+                done(err);
+                return;
+            }
+            done(null, res);
+        });
+}
 
 // const submitNewReview = function (productCode, reviewObj, done) {
 //     let query = { code: productCode }; ``
@@ -85,8 +81,6 @@ const getTopics = function (done) {
 
 module.exports = {
     getTopics,
-    addnewTopic
-    // getProducts,
-    // submitNewReview,
-    // findProductByCode
+    addnewTopic,
+    findTopicById
 }
