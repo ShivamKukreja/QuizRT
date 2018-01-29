@@ -67,6 +67,46 @@ router.get('/:topicId', function(req, res) {
   }
 });
 
+
+router.get('/name/:topicName', function(req, res) {
+  try {
+    const topicName = req.params.topicName
+    topicCtrl.findTopicsByName(topicName,function(err, result) {
+      if (err) {
+        console.error('Error in GET of topic, ERROR::', err);
+        res.status(400).send({error: 'Something went wrong, please try later..!'});
+        return;
+      }
+      res.send(result);
+      return;
+    })
+  } catch (err) {
+    console.error('Unexpected error in GET of topics, ERROR::', err);
+    res.status(500).send({ error: 'Unexpected internal error, please try later..!' });
+    return;
+  }
+});
+
+
+router.get('/search/:searchName', function(req, res) {
+  try {
+    const searchName = req.params.searchName
+    topicCtrl.findTopicsSearch(searchName,function(err, result) {
+      if (err) {
+        console.error('Error in GET of topic, ERROR::', err);
+        res.status(400).send({error: 'Something went wrong, please try later..!'});
+        return;
+      }
+      res.send(result);
+      return;
+    })
+  } catch (err) {
+    console.error('Unexpected error in GET of topics, ERROR::', err);
+    res.status(500).send({ error: 'Unexpected internal error, please try later..!' });
+    return;
+  }
+});
+
 // router.post('/:topicCode/reviews', function(req, res) {
 //   try {
 //     let reviewObj = req.body;
