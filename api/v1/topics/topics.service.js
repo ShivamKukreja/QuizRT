@@ -52,6 +52,32 @@ const findTopicById = function (topicId, done) {
         });
 }
 
+const findTopicsByName = function (topicName, done) {
+    const query = { "name": new RegExp(topicName, 'i')} 
+    TopicModel.find(query)
+        .exec((err, res) => {
+            if (err) {
+                console.error('Error in finding products, ERROR::', err, ' queries for ', query);
+                done(err);
+                return;
+            }
+            done(null, res);
+        });
+}
+
+const wildTopicsSearch = function (searchname, done) {
+    const query = {"keyword":  new RegExp(searchname, 'i') }
+    TopicModel.find(query)
+        .exec((err, res) => {
+            if (err) {
+                console.error('Error in finding products, ERROR::', err, ' queries for ', query);
+                done(err);
+                return;
+            }
+            done(null, res);
+        });
+}
+
 // const submitNewReview = function (productCode, reviewObj, done) {
 //     let query = { code: productCode }; ``
 //     let modification = {
@@ -82,5 +108,7 @@ const findTopicById = function (topicId, done) {
 module.exports = {
     getTopics,
     addnewTopic,
-    findTopicById
+    findTopicById,
+    findTopicsByName,
+    wildTopicsSearch
 }
